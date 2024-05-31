@@ -7,16 +7,27 @@ function addEventNumber() {
     numbers.forEach(number => {
         number.addEventListener("click", function () {
             if (!display.textContent.match(/=/)) {
-                if (display.textContent === "0") {
-                    display.textContent = "";
-                    display.textContent += this.textContent
-
-                } else {
-                    display.textContent += this.textContent;
+                console.log(this.textContent)
+                if (this.textContent.match(/\./)) {
+                    if (display.textContent !== "0") {
+                        let check = display.textContent.split(/[÷+×-]/)
+                        if (check.pop().match(/^\d+$/)) {
+                            display.textContent += this.textContent
+                        }
+                    }
+                }
+                if (this.textContent.match(/\d/)) {
+                    if (display.textContent === "0") {
+                        display.textContent = "";
+                        display.textContent += this.textContent
+                    } else {
+                        display.textContent += this.textContent;
+                    }
                 }
             } else {
-                display.textContent = this.textContent;
-
+                if (this.textContent.match(/\d/)) {
+                    display.textContent = this.textContent;
+                }
             }
         })
     })
@@ -51,8 +62,6 @@ function addEventClear() {
 
 function addEventEvaluate() {
     el = document.getElementById("evaluate");
-    console.log(display.textContent.match(/=/))
-
     el.addEventListener("click", async function () {
         if (!display.textContent.match(/=/)) {
             const response = await fetch(`${API}/calculate`, {

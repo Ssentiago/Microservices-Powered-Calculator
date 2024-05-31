@@ -1,4 +1,5 @@
 import logging
+import re
 
 from aiogram import F, Router
 from aiogram.filters import Command
@@ -36,10 +37,24 @@ async def add_sym(callback: CallbackQuery):
 
 @router.callback_query(F.data.in_('0123456789.'))
 async def add_other_sym(callback: CallbackQuery):
-    await callback.message.edit_text(
-        text = (callback.message.text != '0' and callback.message.text or '') + callback.data,
-        reply_markup = inl_keyboard
-    )
+    text = callback.message.text
+    if callback.data in "0123456789":
+        if callback.message.text != '0':
+            text += callback.data
+        else:
+            text = callback.data
+    else:
+        if callback.message.text != '0':
+            check = re.split(r'÷+×-', callback.message.text)[-1]
+            if re.fullmatch(r"\d+", check):
+                text += callback.data
+
+    if text != callback.message.text:
+        await callback.message.edit_text(
+            text = text,
+            reply_markup = inl_keyboard
+        )
+    await callback.answer()
 
 
 @router.callback_query(F.data == '⌫')
@@ -57,28 +72,15 @@ async def del_sym(callback: CallbackQuery):
 async def caclculate(callback: CallbackQuery):
     if callback.message.text != "0":
         if "=" not in callback.message.text:
-            await  callback.message.edit_text(
-                text = callback.message.text + '=' + await api_calculate(callback.message.text),
-                reply_markup = inl_keyboard
-            )
+            res = await api_calculate(callback.message.text)
+            if res:
+                await  callback.message.edit_text(
+                    text = callback.message.text + '=' + res,
+                    reply_markup = inl_keyboard
+                )
+            else:
+                await callback.answer("Что-то пошло не так... попробуйте повторить попытку позднее")
         else:
             await  callback.message.edit_text(text = "0", reply_markup = inl_keyboard)
     else:
         await  callback.answer()
-
-
-@router.callback_query(F.data == '√')
-async def root(callback: CallbackQuery):
-    await callback.message.edit_text(text = (callback.message.text != '0' and callback.message.text or '') + callback.data,
-                                     reply_markup = inl_keyboard)
-    await callback.answer(
-        'Убедитесь, что следующим символом вы введёте значение корня, а затем в квадратных скобках подкоренное выражение')
-
-
-@router.callback_query(F.data == '!')
-async def fact(callback: CallbackQuery):
-    await callback.answer('Убедитесь, что вы ввели факториальное выражение в скобках прямиком перед знаком факториала')
-    await callback.message.edit_text(
-        text = (callback.message.text != '0' and callback.message.text or '') + callback.data,
-        reply_markup = inl_keyboard
-    )
