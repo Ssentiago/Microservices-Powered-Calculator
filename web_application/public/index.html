@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Калькулятор</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js"
+            integrity="sha384-hIoBPJpTUs74ddyc4bFZSM1TVlQDA60VBbJS0oA934VSz82sBx1X7kSx2ATBDIyd" crossorigin="anonymous"></script>
+
+    <!-- To automatically render math in text elements, include the auto-render extension: -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/contrib/auto-render.min.js"
+            integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"
+            onload="renderMathInElement(document.body);"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.css"
+          integrity="sha384-K1E1xaIzoWihlXfiT5fcmLNabsnrl+dqc0errnRwtMX14tKRA9cCYNDGnXiHEZMs" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.js"
+            integrity="sha384-IolEJdmwZJpJkyCvXBnmGt8wXcP3nvRjxBjPv7/PWW7oODJhZ+qiY1sDpwgjcKLT" crossorigin="anonymous"></script>
+    <style>
+        .calculator {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .calculator .display {
+            height: 70px;
+            font-size: 2.5rem;
+            text-align: right;
+            padding: 10px;
+            background: #f0f0f0;
+            font-palette: dark;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .calculator button {
+            font-size: 1.5rem;
+            margin: 5px 0;
+        }
+
+        .operator {
+            background-color: #ff9500;
+            color: white;
+        }
+
+        .operator:active {
+            background-color: #e08900;
+        }
+
+        .equal {
+            background-color: #34c759;
+            color: white;
+        }
+
+        .equal:active {
+            background-color: #2fa44a;
+        }
+
+
+
+        .number {
+            background-color: #f1f1f1;
+        }
+
+        .number:active {
+            background-color: #dcdcdc;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="calculator bg-light">
+        <div class="display" id="display">0</div>
+        <div class="row">
+            <div class="col-3">
+                <button id="clear" class="btn btn-danger btn-block">C</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-9">
+                <div class="row">
+                    <div class="col-4">
+                        <button class="btn btn-number btn-block">7</button>
+                    </div>
+                    <div class="col-4">
+                        <button class="btn btn-number btn-block">8</button>
+                    </div>
+                    <div class="col-4">
+                        <button class="btn btn-number btn-block">9</button>
+                    </div>
+                    <div class="col-4">
+                        <button class="btn btn-number btn-block">4</button>
+                    </div>
+                    <div class="col-4">
+                        <button class="btn btn-number btn-block">5</button>
+                    </div>
+                    <div class="col-4">
+                        <button class="btn btn-number btn-block">6</button>
+                    </div>
+                    <div class="col-4">
+                        <button class="btn btn-number btn-block">1</button>
+                    </div>
+                    <div class="col-4">
+                        <button class="btn btn-number btn-block">2</button>
+                    </div>
+                    <div class="col-4">
+                        <button class="btn btn-number btn-block">3</button>
+                    </div>
+                    <div class="col-4">
+                        <button class="btn btn-number btn-block">0</button>
+                    </div>
+                    <div class="col-4">
+                        <button class="btn btn-number btn-block">.</button>
+                    </div>
+                    <div class="col-4">
+                        <button id="evaluate" class="btn btn-equal btn-block">=</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="row">
+                    <div class="col-12">
+                        <button class="btn btn-operator btn-block">÷</button>
+                    </div>
+                    <div class="col-12">
+                        <button class="btn btn-operator btn-block">×</button>
+                    </div>
+                    <div class="col-12">
+                        <button class="btn btn-operator btn-block">-</button>
+                    </div>
+                    <div class="col-12">
+                        <button class="btn btn-operator btn-block">+</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="./index.js"></script>
+<script>addButtonListeners()</script>
+</body>
+</html>
