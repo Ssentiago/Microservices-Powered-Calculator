@@ -11,9 +11,9 @@
 Проект задумывался как учебный. Его основная цель - это познакомиться с базовыми основами разделения составных частей проекта на независимые модули и с их контейнеризацией при помощи docker, а также оркестрацией посредством docker-compose
 
 ### Технологии
-Backend: Python, FastAPI
-Frontend: HTML, JS, Node JS
-Build and Development: Docker, Docker-Compose
+* Backend: Python, FastAPI
+* Frontend: HTML, JS, Node JS
+* Build and Development: Docker, Docker-Compose
 
 ### Установка 
 * git clone https://github.com/Ssentiago/Microservices-Powered-Calculator
