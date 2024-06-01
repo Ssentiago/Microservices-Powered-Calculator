@@ -1,6 +1,11 @@
-from fastapi import APIRouter, Body
+import os
+import sys
 
-from .service.service import calculate_expression
+from fastapi import APIRouter, Body
+current_dir = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(os.path.join(current_dir, '..', 'service'))
+
+from service import calculate_expression
 
 router = APIRouter()
 

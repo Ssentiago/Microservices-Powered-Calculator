@@ -1,9 +1,14 @@
+import os
+import sys
 
 import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.staticfiles import StaticFiles
 from views import views_router
+
+
+
 
 app = FastAPI()
 app.include_router(views_router)
