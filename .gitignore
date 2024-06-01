@@ -1,3 +1,4 @@
 /web_application/bootstrap/
 /web_application/node_modules/
 __pycache__/
+*.pyc
