@@ -3,13 +3,17 @@ import os
 import re
 import sys
 
+current_dir = os.path.dirname(os.path.abspath(__file__))
+
+sys.path.append(os.path.join(current_dir, '..', 'inline_keyboard'))
+sys.path.append(os.path.join(current_dir, '..', 'service'))
 
 from aiogram import F, Router
 from aiogram.filters import Command
 from aiogram.types import CallbackQuery, Message
 
-from inline_keyboard.keyboard import keyboard as inl_keyboard
-from service.service import api_calculate
+from inline_keyboard import keyboard as inl_keyboard
+from service import api_calculate
 
 
 

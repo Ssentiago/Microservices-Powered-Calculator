@@ -4,10 +4,7 @@ import sys
 
 from aiogram import Bot, Dispatcher
 
-current_dir = os.path.dirname(os.path.abspath(__file__))
 
-sys.path.append(os.path.join(current_dir, '..', 'inline_keyboard'))
-sys.path.append(os.path.join(current_dir, '..', 'service'))
 
 
 from bot_menu.menu import set_menu
@@ -22,11 +19,10 @@ async def main():
     dp = Dispatcher()
     dp.include_router(user_handlers.router)
     dp.include_router(other_handlers.router)
-
+    dp.startup.register(set_menu)
     await bot.delete_webhook(drop_pending_updates=True)
-    await dp.start_polling(bot)
-    await dp.startup.register(set_menu)
 
+    await dp.start_polling(bot)
 
 if __name__ == '__main__':
     asyncio.run(main())
