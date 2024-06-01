@@ -1,0 +1,51 @@
+version: '3.8'
+
+networks:
+  my_network:
+    driver: bridge
+
+services:
+  aiogram_bot:
+    build:
+      context: ./aiogram_bot
+      dockerfile: Dockerfile
+    image: aiogram_bot:latest
+    container_name: aiogram_bot
+    volumes:
+      - ./aiogram_bot:/app
+    depends_on:
+      - api
+    environment:
+      - PYTHONUNBUFFERED=1
+    networks:
+      - my_network
+
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    image: api:latest
+    container_name: api
+    volumes:
+      - ./api:/app
+    environment:
+      - PYTHONUNBUFFERED=1
+    ports:
+      - "8000:8000"
+    networks:
+      - my_network
+
+  web_application:
+    build:
+      context: ./web_application
+      dockerfile: Dockerfile
+    image: web_application:latest
+    container_name: web_application
+    volumes:
+      - ./web_application:/app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
+    networks:
+      - my_network

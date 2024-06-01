@@ -1,12 +1,17 @@
 import logging
+import os
 import re
+import sys
+
 
 from aiogram import F, Router
 from aiogram.filters import Command
 from aiogram.types import CallbackQuery, Message
 
-from aiogram_bot.inline_keyboard.keyboard import keyboard as inl_keyboard
-from aiogram_bot.service.service import api_calculate
+from inline_keyboard.keyboard import keyboard as inl_keyboard
+from service.service import api_calculate
+
+
 
 logger = logging.getLogger(__name__)
 router = Router()

@@ -1,12 +1,20 @@
 import asyncio
+import os
+import sys
 
 from aiogram import Bot, Dispatcher
 
+current_dir = os.path.dirname(os.path.abspath(__file__))
 
-from aiogram_bot.bot_menu.menu import set_menu
+sys.path.append(os.path.join(current_dir, '..', 'inline_keyboard'))
+sys.path.append(os.path.join(current_dir, '..', 'service'))
+
+
+from bot_menu.menu import set_menu
 from config.config import load_config, Config
 from config.log_config import *
-from handlers import user_handlers, other_handlers
+from handlers import other_handlers, user_handlers
+
 
 async def main():
     config: Config = load_config()
